@@ -8,6 +8,7 @@
         type="email"
         v-model:value="email"
       />
+      <RadioButton id="radio" :items="items" />
       <ActionButton label="Continuar" @click="teste" />
     </div>
   </div>
@@ -17,8 +18,19 @@
 import { ref } from "vue";
 import FieldText from "./components/FormFields/FieldText.vue";
 import ActionButton from "./components/FormFields/ActionButton.vue";
+import RadioButton from "./components/FormFields/RadioButton.vue";
 
 const email = ref("");
+const items = ref([
+  {
+    label: "Pessoa física",
+    value: "fisica",
+  },
+  {
+    label: "Pessoa jurídica",
+    value: "juridica",
+  },
+]);
 
 const teste = () => {
   console.log("teste");
