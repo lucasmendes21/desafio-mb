@@ -1,40 +1,13 @@
 <template>
   <div class="app">
     <div class="content">
-      <h1 class="title">Seja bem vindo(a)</h1>
-      <FieldText
-        id="email"
-        label="Endereço de e-mail"
-        type="email"
-        v-model:value="email"
-      />
-      <RadioButton id="radio" :items="items" />
-      <ActionButton label="Continuar" @click="teste" />
+      <Registration />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import FieldText from "./components/FormFields/FieldText.vue";
-import ActionButton from "./components/FormFields/ActionButton.vue";
-import RadioButton from "./components/FormFields/RadioButton.vue";
-
-const email = ref("");
-const items = ref([
-  {
-    label: "Pessoa física",
-    value: "fisica",
-  },
-  {
-    label: "Pessoa jurídica",
-    value: "juridica",
-  },
-]);
-
-const teste = () => {
-  console.log("teste");
-};
+import Registration from "./views/Registration/index.vue";
 </script>
 
 <style scoped>
@@ -48,20 +21,8 @@ const teste = () => {
 }
 
 .app .content {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  gap: 1rem;
-
   max-width: var(--max-width-xs);
   margin: 0 auto;
   padding: 0 1.5rem;
-}
-
-.app .content .title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
 }
 </style>

@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     required: true,
@@ -27,6 +27,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const value = defineModel("value");
 </script>
 
 <style scoped>

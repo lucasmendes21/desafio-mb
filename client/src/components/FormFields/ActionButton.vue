@@ -1,7 +1,7 @@
 <template>
   <button
     class="form-field-button"
-    :class="{ 'form-field-button-back': isBackButton }"
+    :class="{ 'form-field-button-secondary': severity === 'secondary' }"
     :type="type"
   >
     {{ label }}
@@ -19,10 +19,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  isBackButton: {
-    type: Boolean,
+  severity: {
+    type: String,
     required: false,
-    default: false,
+    default: "primary",
   },
 });
 </script>
@@ -40,7 +40,7 @@ const props = defineProps({
   width: 100%;
 }
 
-.form-field-button-back {
+.form-field-button-secondary {
   background-color: var(--color-white);
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
