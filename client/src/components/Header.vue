@@ -24,10 +24,15 @@ const props = defineProps({
 </script>
 
 <style scoped>
+.header {
+  margin-bottom: 0px;
+}
+
 .header-title {
   font-size: 1.8rem;
   font-weight: 700;
   margin: 0;
+  word-wrap: break-word;
 }
 
 .header-stepper-active {

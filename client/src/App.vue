@@ -16,13 +16,17 @@ import Registration from "./views/Registration/index.vue";
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .app .content {
+  width: 100%;
   max-width: var(--max-width-xs);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 </style>

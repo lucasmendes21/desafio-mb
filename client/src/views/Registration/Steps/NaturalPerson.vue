@@ -1,0 +1,39 @@
+<template>
+  <ContentBlock title="Pessoa Física">
+    <template #form>
+      <FieldText id="name" label="Nome" type="text" v-model:value="name" />
+      <FieldText id="cpf" label="CPF" type="text" v-model:value="cpf" />
+      <FieldText
+        id="birthDate"
+        label="Data de nascimento"
+        type="date"
+        v-model:value="birthDate"
+      />
+      <FieldText
+        id="phone"
+        label="Telefone"
+        type="text"
+        v-model:value="phone"
+      />
+    </template>
+
+    <template #actions>
+      <ActionButton label="Voltar" severity="secondary" @click="previousStep" />
+      <ActionButton label="Continuar" @click="nextStep" />
+    </template>
+  </ContentBlock>
+</template>
+
+<script setup>
+import ContentBlock from "../../../components/ContentBlock.vue";
+import FieldText from "../../../components/FormFields/FieldText.vue";
+import ActionButton from "../../../components/FormFields/ActionButton.vue";
+import {
+  name,
+  cpf,
+  birthDate,
+  phone,
+  previousStep,
+  nextStep,
+} from "../../../state/registration";
+</script>
