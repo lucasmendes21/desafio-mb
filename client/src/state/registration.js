@@ -52,7 +52,19 @@ export const validateCurrentStep = () => {
 }
 
 export const clearForm = () => {
-  email.value = "";
+  form.value = {
+    email: "",
+    personType: "fisica",
+    name: "",
+    companyName: "",
+    cpf: "",
+    cnpj: "",
+    birthDate: "",
+    phone: "",
+    companyOpeningDate: "",
+    password: "",
+  }
+  currentStep.value = 1
 };
 
 export const items = [

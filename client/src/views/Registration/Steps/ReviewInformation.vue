@@ -85,11 +85,17 @@ import ActionButton from "../../../components/FormFields/ActionButton.vue";
 import FieldText from "../../../components/FormFields/FieldText.vue";
 import FieldDate from "../../../components/FormFields/FieldDate.vue";
 import { computed } from "vue";
-import { previousStep, form, errors } from "../../../state/registration";
+import {
+  previousStep,
+  form,
+  errors,
+  clearForm,
+} from "../../../state/registration";
 import { formatDate, formatDateToISO } from "../../../helpers/format";
 
 const handleCreateUser = () => {
   console.log("create user");
+  clearForm();
 };
 
 const formatBirthDate = computed({
@@ -106,5 +112,5 @@ const formatCompanyOpeningDate = computed({
   },
 });
 
-const isNaturalPerson = computed(() => form.value.type === "naturalPerson");
+const isNaturalPerson = computed(() => form.value.personType === "fisica");
 </script>

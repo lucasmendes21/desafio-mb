@@ -98,7 +98,8 @@ export const validationSchema = {
         return { isValid: true };
       },
     },
-  }
+  },
+  reviewInformation: {}
 };
 
 export const validateForm = (step, form) => {
