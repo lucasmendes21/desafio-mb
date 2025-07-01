@@ -1,18 +1,41 @@
 import { ref } from "vue";
+import { validateForm } from '../views/Registration/validation'
 
 export const currentStep = ref(1);
-export const email = ref("");
-export const personType = ref("fisica");
-export const name = ref("");
-export const companyName = ref("");
-export const cpf = ref("");
-export const cnpj = ref("");
-export const birthDate = ref("");
-export const phone = ref("");
-export const companyOpeningDate = ref("");
-export const password = ref("");
+export const form = ref({
+  email: "",
+  personType: "fisica",
+  name: "",
+  companyName: "",
+  cpf: "",
+  cnpj: "",
+  birthDate: "",
+  phone: "",
+  companyOpeningDate: "",
+  password: "",
+});
+
+const getStepName = () => {
+  switch (currentStep.value) {
+    case 1:
+      return 'welcome';
+    case 2:
+      return form.value.personType === 'fisica' ? 'naturalPerson' : 'legalPerson';
+    case 3:
+      return 'accessPassword';
+    case 4:
+      return 'reviewInformation';
+    default:
+      return 'welcome';
+  }
+}
+
+export const errors = ref({});
 
 export const nextStep = () => {
+  validateCurrentStep()
+  if (Object.keys(errors.value).length > 0) return
+
   if (currentStep.value < 4) {
     currentStep.value++;
   }
@@ -23,6 +46,10 @@ export const previousStep = () => {
     currentStep.value--;
   }
 };
+
+export const validateCurrentStep = () => {
+  errors.value = validateForm(getStepName(), form.value);
+}
 
 export const clearForm = () => {
   email.value = "";

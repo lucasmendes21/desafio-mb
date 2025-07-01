@@ -5,7 +5,8 @@
         id="password"
         label="Sua senha"
         type="password"
-        v-model:value="password"
+        v-model:value="form.password"
+        :error="errors.password"
       />
     </template>
 
@@ -20,5 +21,10 @@
 import ContentBlock from "../../../components/ContentBlock.vue";
 import FieldText from "../../../components/FormFields/FieldText.vue";
 import ActionButton from "../../../components/FormFields/ActionButton.vue";
-import { password, previousStep, nextStep } from "../../../state/registration";
+import {
+  form,
+  previousStep,
+  nextStep,
+  errors,
+} from "../../../state/registration";
 </script>

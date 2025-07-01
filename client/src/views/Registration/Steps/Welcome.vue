@@ -5,9 +5,10 @@
         id="email"
         label="Endereço de e-mail"
         type="email"
-        v-model:value="email"
+        v-model:value="form.email"
+        :error="errors.email"
       />
-      <RadioButton id="radio" :items="items" v-model:value="personType" />
+      <RadioButton id="radio" :items="items" v-model:value="form.personType" />
     </template>
 
     <template #actions>
@@ -17,12 +18,7 @@
 </template>
 
 <script setup>
-import {
-  email,
-  personType,
-  items,
-  nextStep,
-} from "../../../state/registration";
+import { form, items, nextStep, errors } from "../../../state/registration";
 import ContentBlock from "../../../components/ContentBlock.vue";
 import FieldText from "../../../components/FormFields/FieldText.vue";
 import RadioButton from "../../../components/FormFields/RadioButton.vue";
