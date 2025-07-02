@@ -93,12 +93,14 @@ import {
   validateCurrentStep,
 } from "../../../state/registration";
 import { formatDate, formatDateToISO } from "../../../helpers/format";
+import { createUser } from "../../../services/registration.service";
 
-const handleCreateUser = () => {
+const handleCreateUser = async () => {
   const hasErrors = validateCurrentStep();
   if (hasErrors) return;
 
   console.log("create user");
+  await createUser(form.value);
   clearForm();
 };
 
