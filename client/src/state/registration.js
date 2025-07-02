@@ -33,8 +33,8 @@ const getStepName = () => {
 export const errors = ref({});
 
 export const nextStep = () => {
-  validateCurrentStep()
-  if (Object.keys(errors.value).length > 0) return
+  const hasErrors = validateCurrentStep()
+  if (hasErrors) return
 
   if (currentStep.value < 4) {
     currentStep.value++;
@@ -49,6 +49,7 @@ export const previousStep = () => {
 
 export const validateCurrentStep = () => {
   errors.value = validateForm(getStepName(), form.value);
+  return Object.keys(errors.value).length > 0
 }
 
 export const clearForm = () => {

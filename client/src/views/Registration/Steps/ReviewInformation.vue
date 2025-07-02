@@ -90,10 +90,14 @@ import {
   form,
   errors,
   clearForm,
+  validateCurrentStep,
 } from "../../../state/registration";
 import { formatDate, formatDateToISO } from "../../../helpers/format";
 
 const handleCreateUser = () => {
+  const hasErrors = validateCurrentStep();
+  if (hasErrors) return;
+
   console.log("create user");
   clearForm();
 };

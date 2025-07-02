@@ -1,18 +1,11 @@
-import { checkEmptyField, validateCPF, validateDate, validateCNPJ } from "../../helpers/validation";
+import { checkEmptyField, validateCPF, validateDate, validateCNPJ, validateEmail } from "../../helpers/validation";
 
 export const validationSchema = {
   welcome: {
     email: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "E-mail é um campo obrigatório" };
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-          return {
-            isValid: false,
-            message: "O e-mail informado é inválido",
-          };
-        }
+        const { isValid, message } = validateEmail(value);
+        if (!isValid) return { isValid: false, message };
 
         return { isValid: true };
       },
@@ -27,8 +20,6 @@ export const validationSchema = {
     },
     cpf: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "CPF é um campo obrigatório" };
-
         const { isValid, message } = validateCPF(value);
         if (!isValid) return { isValid: false, message };
 
@@ -37,8 +28,6 @@ export const validationSchema = {
     },
     birthDate: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "Data de nascimento é um campo obrigatório" };
-
         const { isValid, message } = validateDate(value);
         if (!isValid) return { isValid: false, message };
 
@@ -62,7 +51,7 @@ export const validationSchema = {
     },
     cnpj: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "CNPJ é um campo obrigatório" };
+        if (checkEmptyField(value)) return { isValid: false, message: "CNPJ é um campo obrigatório" };
 
         const { isValid, message } = validateCNPJ(value);
         if (!isValid) return { isValid: false, message };
@@ -72,7 +61,7 @@ export const validationSchema = {
     },
     companyOpeningDate: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "Data de abertura é um campo obrigatório" };
+        if (checkEmptyField(value)) return { isValid: false, message: "Data de abertura é um campo obrigatório" };
 
         const { isValid, message } = validateDate(value);
         if (!isValid) return { isValid: false, message };
@@ -82,7 +71,7 @@ export const validationSchema = {
     },
     phone: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "Telefone é um campo obrigatório" };
+        if (checkEmptyField(value)) return { isValid: false, message: "Telefone é um campo obrigatório" };
 
         return { isValid: true };
       },
@@ -99,7 +88,83 @@ export const validationSchema = {
       },
     },
   },
-  reviewInformation: {}
+  reviewInformation: {
+    email: {
+      validator: (value) => {
+        const { isValid, message } = validateEmail(value);
+        if (!isValid) return { isValid: false, message };
+
+        return { isValid: true };
+      },
+    },
+    name: {
+      validator: (value, form) => {
+        if (form.personType !== "fisica") return { isValid: true };
+
+        if (checkEmptyField(value)) return { isValid: false, message: "Nome é um campo obrigatório" };
+        return { isValid: true };
+      },
+    },
+    cpf: {
+      validator: (value, form) => {
+        if (form.personType !== "fisica") return { isValid: true };
+
+        const { isValid, message } = validateCPF(value);
+        if (!isValid) return { isValid: false, message };
+
+        return { isValid: true };
+      },
+    },
+    birthDate: {
+      validator: (value, form) => {
+        if (form.personType !== "fisica") return { isValid: true };
+
+        const { isValid, message } = validateDate(value);
+        if (!isValid) return { isValid: false, message };
+
+        return { isValid: true };
+      },
+    },
+    phone: {
+      validator: (value) => {
+        if (checkEmptyField(value)) return { isValid: false, message: "Telefone é um campo obrigatório" };
+
+        return { isValid: true };
+      },
+    },
+    companyName: {
+      validator: (value, form) => {
+        if (form.personType === "fisica") return { isValid: true };
+
+        if (checkEmptyField(value)) return { isValid: false, message: "Razão social é um campo obrigatório" };
+        return { isValid: true };
+      },
+    },
+    cnpj: {
+      validator: (value, form) => {
+        if (form.personType === "fisica") return { isValid: true };
+
+        if (checkEmptyField(value)) return { isValid: false, message: "CNPJ é um campo obrigatório" };
+
+        const { isValid, message } = validateCNPJ(value);
+        if (!isValid) return { isValid: false, message };
+
+        return { isValid: true };
+      },
+    },
+    companyOpeningDate: {
+      validator: (value, form) => {
+        if (form.personType === "fisica") return { isValid: true };
+
+        if (checkEmptyField(value)) return { isValid: false, message: "Data de abertura é um campo obrigatório" };
+
+        const { isValid, message } = validateDate(value);
+        if (!isValid) return { isValid: false, message };
+
+        return { isValid: true };
+      },
+    },
+  }
 };
 
 export const validateForm = (step, form) => {
@@ -109,7 +174,7 @@ export const validateForm = (step, form) => {
 
   if (validation) {
     Object.keys(validation).forEach((key) => {
-      const { isValid, message } = validation[key].validator(form[key]);
+      const { isValid, message } = validation[key].validator(form[key], form);
       if (!isValid) {
         errors[key] = message;
       }

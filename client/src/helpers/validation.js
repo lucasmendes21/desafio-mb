@@ -1,6 +1,12 @@
-import { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ } from "./constants";
+import { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ, ERROR_MESSAGES_EMAIL } from "./constants";
+
+const checkEmptyField = (field) => {
+  return field === '' || field === undefined || field === null
+}
 
 const validateCPF = (cpf) => {
+  if (checkEmptyField(cpf)) return { isValid: false, message: ERROR_MESSAGES_CPF.EMPTY_CPF };
+
   const removeNonNumericCharacters = cpf.replace(/\D/g, '')
 
   if (removeNonNumericCharacters.length !== 11) {
@@ -37,11 +43,9 @@ const validateCPF = (cpf) => {
   return { isValid: true }
 }
 
-const checkEmptyField = (field) => {
-  return field === '' || field === undefined || field === null
-}
-
 const validateDate = (date) => {
+  if (checkEmptyField(date)) return { isValid: false, message: ERROR_MESSAGES_DATES.EMPTY_DATE };
+
   const checkDateIsCorrectFormat = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/.test(date)
   if (!checkDateIsCorrectFormat) return { isValid: false, message: ERROR_MESSAGES_DATES.INVALID_DATE_FORMAT }
 
@@ -112,9 +116,21 @@ const validateCNPJ = (cnpj) => {
   return { isValid: true }
 }
 
+const validateEmail = (email) => {
+  if (checkEmptyField(email)) return { isValid: false, message: ERROR_MESSAGES_EMAIL.EMPTY_EMAIL };
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { isValid: false, message: ERROR_MESSAGES_EMAIL.INVALID_EMAIL };
+  }
+
+  return { isValid: true };
+}
+
 export {
   validateCPF,
   checkEmptyField,
   validateDate,
-  validateCNPJ
+  validateCNPJ,
+  validateEmail
 }
