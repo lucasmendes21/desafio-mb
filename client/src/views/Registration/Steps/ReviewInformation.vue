@@ -99,7 +99,6 @@ const handleCreateUser = async () => {
   const hasErrors = validateCurrentStep();
   if (hasErrors) return;
 
-  console.log("create user");
   await createUser(form.value);
   clearForm();
 };

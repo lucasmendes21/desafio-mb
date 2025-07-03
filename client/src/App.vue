@@ -3,11 +3,13 @@
     <div class="content">
       <Registration />
     </div>
+    <Notification />
   </div>
 </template>
 
 <script setup>
 import Registration from "./views/Registration/index.vue";
+import Notification from "./components/Notification.vue";
 </script>
 
 <style scoped>
