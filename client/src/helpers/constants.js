@@ -28,4 +28,9 @@ const ERROR_MESSAGES_EMAIL = {
   INVALID_EMAIL: 'O e-mail informado é inválido',
 }
 
-export { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ, ERROR_MESSAGES_EMAIL }
+const ERROR_MESSAGES_PHONE = {
+  EMPTY_PHONE: 'Telefone é um campo obrigatório',
+  INVALID_PHONE_LENGTH: 'Telefone inválido. O telefone deve conter 11 dígitos.',
+}
+
+export { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ, ERROR_MESSAGES_EMAIL, ERROR_MESSAGES_PHONE }

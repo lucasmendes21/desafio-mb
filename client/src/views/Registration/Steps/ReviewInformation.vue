@@ -100,7 +100,6 @@ const handleCreateUser = async () => {
   if (hasErrors) return;
 
   await createUser(form.value);
-  clearForm();
 };
 
 const formatBirthDate = computed({

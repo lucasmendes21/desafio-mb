@@ -4,7 +4,6 @@
     :class="[notification.type, { 'not-visible fade-out': !notification.show }]"
   >
     <span class="notification-message">{{ notification.message }}</span>
-    <button @click="close" class="notification-close-button">X</button>
   </div>
 </template>
 
@@ -40,5 +39,9 @@ const notification = inject("notification");
 
 .error {
   background-color: #f44336;
+}
+
+.warning {
+  background-color: #ff9800;
 }
 </style>

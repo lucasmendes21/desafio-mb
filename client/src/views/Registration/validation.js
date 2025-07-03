@@ -1,4 +1,4 @@
-import { checkEmptyField, validateCPF, validateDate, validateCNPJ, validateEmail } from "../../helpers/validation";
+import { checkEmptyField, validateCPF, validateDate, validateCNPJ, validateEmail, validatePhone } from "../../helpers/validation";
 
 export const validationSchema = {
   welcome: {
@@ -36,7 +36,8 @@ export const validationSchema = {
     },
     phone: {
       validator: (value) => {
-        if (!value) return { isValid: false, message: "Telefone é um campo obrigatório" };
+        const { isValid, message } = validatePhone(value);
+        if (!isValid) return { isValid: false, message };
 
         return { isValid: true };
       },
@@ -71,7 +72,8 @@ export const validationSchema = {
     },
     phone: {
       validator: (value) => {
-        if (checkEmptyField(value)) return { isValid: false, message: "Telefone é um campo obrigatório" };
+        const { isValid, message } = validatePhone(value);
+        if (!isValid) return { isValid: false, message };
 
         return { isValid: true };
       },
@@ -127,7 +129,8 @@ export const validationSchema = {
     },
     phone: {
       validator: (value) => {
-        if (checkEmptyField(value)) return { isValid: false, message: "Telefone é um campo obrigatório" };
+        const { isValid, message } = validatePhone(value);
+        if (!isValid) return { isValid: false, message };
 
         return { isValid: true };
       },

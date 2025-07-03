@@ -1,4 +1,5 @@
 import { showNotification } from "../plugin/notification";
+import { clearForm } from "../state/registration";
 
 const createUser = async (data) => {
   try {
@@ -10,16 +11,27 @@ const createUser = async (data) => {
       },
     });
 
+    const result = await response.json();
+
+    if (!response.ok && response.status === 400) {
+      showNotification({
+        type: "warning",
+        message: result.message,
+        duration: 3000,
+      });
+      return;
+    }
+
     showNotification({
       type: "success",
       message: "Usuário criado com sucesso",
       duration: 3000,
     });
+    clearForm()
   } catch (error) {
-    console.error(error);
     showNotification({
       type: "error",
-      message: "Erro ao criar usuário",
+      message: "Erro no servidor ao criar usuário",
       duration: 3000,
     });
   }

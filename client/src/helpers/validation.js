@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ, ERROR_MESSAGES_EMAIL } from "./constants";
+import { ERROR_MESSAGES_CPF, ERROR_MESSAGES_DATES, ERROR_MESSAGES_CNPJ, ERROR_MESSAGES_EMAIL, ERROR_MESSAGES_PHONE } from "./constants";
 
 const checkEmptyField = (field) => {
   return field === '' || field === undefined || field === null
@@ -127,10 +127,22 @@ const validateEmail = (email) => {
   return { isValid: true };
 }
 
+const validatePhone = (phone) => {
+  if (checkEmptyField(phone)) return { isValid: false, message: ERROR_MESSAGES_PHONE.EMPTY_PHONE };
+
+  const removeNonNumericCharacters = phone.replace(/\D/g, '')
+  if (removeNonNumericCharacters.length !== 11) {
+    return { isValid: false, message: ERROR_MESSAGES_PHONE.INVALID_PHONE_LENGTH };
+  }
+
+  return { isValid: true };
+}
+
 export {
   validateCPF,
   checkEmptyField,
   validateDate,
   validateCNPJ,
-  validateEmail
+  validateEmail,
+  validatePhone
 }
