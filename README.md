@@ -12,7 +12,7 @@ Este projeto consiste em uma aplicação full-stack com frontend em Vue.js e bac
 ### 1. Clone o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone <https://github.com/lucasmendes21/desafio-mb>
 cd desafio-mb
 ```
 
